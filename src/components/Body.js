@@ -1,4 +1,4 @@
-import { RestrauntList } from "./Constant";
+import { RestrauntList } from "../utils/Constant";
 import { RestrauntCard } from "./RestrauntCard";
 
 import { useState } from "react";
@@ -8,15 +8,27 @@ const Body = () => {
   const [searchClicked, setSearchClicked] = useState("false");
   const [resturants, setResturants] = useState(RestrauntList);
 
-  const filterData =(searchText, resturants)=>{
-    const data = resturants.filter((item)=>
-      item.name.includes(searchText))
+  const filterData = (searchText, resturants) => {
+    const data = resturants.filter((item) => item.name.includes(searchText));
     return data;
-  }
-
+  };
 
   return (
     <>
+      <div className="filter">
+        <button
+          className="filter-btn"
+          onClick={() => {
+            const filteredList = resturants.filter((item) => {
+              return item.rating > 3;
+            });
+            setResturants(filteredList);
+          }}
+        >
+          Top Rated Restraunts
+        </button>
+      </div>
+
       <div className="search-container">
         <input
           type="text"
@@ -37,10 +49,9 @@ const Body = () => {
             // } else {
             //   setSearchClicked("true");
             // }
-            const data = filterData(searchText,resturants)
-            setResturants(data)
-          }
-        }
+            const data = filterData(searchText, resturants);
+            setResturants(data);
+          }}
         >
           search
         </button>
@@ -50,15 +61,6 @@ const Body = () => {
         {resturants.map((item) => {
           return <RestrauntCard {...item} key={item.id} />;
         })}
-
-        {/* <RestrauntCard {...RestrauntList[0]}/>
-        <RestrauntCard {...RestrauntList[1]}/>
-        <RestrauntCard {...RestrauntList[2]}/>
-        <RestrauntCard {...RestrauntList[3]}/> */}
-        {/* <RestrauntCard resturant={RestrauntList[0]}/>
-        <RestrauntCard resturant={RestrauntList[1]}/>
-        <RestrauntCard resturant={RestrauntList[2]}/>
-        <RestrauntCard resturant={RestrauntList[3]}/> */}
       </div>
     </>
   );
