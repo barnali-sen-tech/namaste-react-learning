@@ -1,16 +1,30 @@
 import { RestrauntList } from "../utils/Constant";
 import { RestrauntCard } from "./RestrauntCard";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [searchClicked, setSearchClicked] = useState("false");
   const [resturants, setResturants] = useState(RestrauntList);
 
+  useEffect(() => {
+    console.log("useeffect called");
+    fetchdata();
+  }, []);
+
   const filterData = (searchText, resturants) => {
     const data = resturants.filter((item) => item.name.includes(searchText));
     return data;
+  };
+  console.log("hi");
+  console.log("useeffect called");
+  const fetchdata = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.572646&lng=88.36389500000001&collection=83645&isNewCollectionFlow=true&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
+    );
+    const json = await data.json();
+    console.log(json);
   };
 
   return (
@@ -25,7 +39,7 @@ const Body = () => {
             setResturants(filteredList);
           }}
         >
-          Top Rated Restraunts
+          Top Rated Restraunts1
         </button>
       </div>
 
