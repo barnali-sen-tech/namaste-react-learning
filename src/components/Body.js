@@ -1,22 +1,48 @@
-import { RestrauntList } from "./Constant";
+import { RestrauntList } from "../utils/Constant";
 import { RestrauntCard } from "./RestrauntCard";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [searchClicked, setSearchClicked] = useState("false");
   const [resturants, setResturants] = useState(RestrauntList);
 
-  const filterData =(searchText, resturants)=>{
-    const data = resturants.filter((item)=>
-      item.name.includes(searchText))
-    return data;
-  }
+  useEffect(() => {
+    console.log("useeffect called");
+    fetchdata();
+  }, []);
 
+  const filterData = (searchText, resturants) => {
+    const data = resturants.filter((item) => item.name.includes(searchText));
+    return data;
+  };
+  console.log("hi");
+  console.log("useeffect called");
+  const fetchdata = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.572646&lng=88.36389500000001&collection=83645&isNewCollectionFlow=true&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
+    );
+    const json = await data.json();
+    console.log(json);
+  };
 
   return (
     <>
+      <div className="filter">
+        <button
+          className="filter-btn"
+          onClick={() => {
+            const filteredList = resturants.filter((item) => {
+              return item.rating > 3;
+            });
+            setResturants(filteredList);
+          }}
+        >
+          Top Rated Restraunts1
+        </button>
+      </div>
+
       <div className="search-container">
         <input
           type="text"
@@ -37,10 +63,9 @@ const Body = () => {
             // } else {
             //   setSearchClicked("true");
             // }
-            const data = filterData(searchText,resturants)
-            setResturants(data)
-          }
-        }
+            const data = filterData(searchText, resturants);
+            setResturants(data);
+          }}
         >
           search
         </button>
@@ -50,15 +75,6 @@ const Body = () => {
         {resturants.map((item) => {
           return <RestrauntCard {...item} key={item.id} />;
         })}
-
-        {/* <RestrauntCard {...RestrauntList[0]}/>
-        <RestrauntCard {...RestrauntList[1]}/>
-        <RestrauntCard {...RestrauntList[2]}/>
-        <RestrauntCard {...RestrauntList[3]}/> */}
-        {/* <RestrauntCard resturant={RestrauntList[0]}/>
-        <RestrauntCard resturant={RestrauntList[1]}/>
-        <RestrauntCard resturant={RestrauntList[2]}/>
-        <RestrauntCard resturant={RestrauntList[3]}/> */}
       </div>
     </>
   );
