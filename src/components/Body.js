@@ -20,11 +20,16 @@ const Body = () => {
   console.log("hi");
   console.log("useeffect called");
   const fetchdata = async () => {
-    const data = await fetch(
+    const data1 = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.572646&lng=88.36389500000001&collection=83645&isNewCollectionFlow=true&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
     );
-    const json = await data.json();
-    console.log(json);
+    const json = await data1.json();
+  
+    const data2= json.data.cards.slice(3)
+    console.log(data2);
+    const res=[data2].card.card
+    setResturants(res)
+    
   };
 
   return (
@@ -33,8 +38,8 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            const filteredList = resturants.filter((item) => {
-              return item.rating > 3;
+            const filteredList = resturants.card.card.filter((item) => {
+              // return item.rating > 3;
             });
             setResturants(filteredList);
           }}
@@ -63,7 +68,7 @@ const Body = () => {
             // } else {
             //   setSearchClicked("true");
             // }
-            const data = filterData(searchText, resturants);
+            const data = filterData(searchText, resturants.card.card);
             setResturants(data);
           }}
         >
