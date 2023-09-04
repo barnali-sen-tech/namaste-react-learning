@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [searchClicked, setSearchClicked] = useState("false");
-  const [resturants, setResturants] = useState(RestrauntList);
+  const [resturants, setResturants] = useState([]);
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
 
   useEffect(() => {
@@ -28,9 +28,9 @@ const Body = () => {
     const json = await data1.json();
 
     const data2 =
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    // console.log(data2);
+    console.log(data2);
     // const res = [data2].card.card;
     setResturants(data2);
     setFilteredRestraunts(data2);
@@ -90,7 +90,7 @@ const Body = () => {
       </div>
       <div className="restraunt-list">
         {filteredRestraunts.map((item) => {
-          return <RestrauntCard {...item} key={item.id} />;
+          return <RestrauntCard data={item?.info} key={item.id} />;
         })}
       </div>
     </>

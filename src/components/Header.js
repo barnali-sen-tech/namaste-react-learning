@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const [btnNameReact, setBtnNameReact]= useState("Login")
+// const [btnNameReact, setBtnNameReact]= useState("Login")
 
 const Title = () => {
     return (
@@ -25,9 +25,9 @@ const Title = () => {
             <li>About</li>
             <li>Contact</li>
             <li>Cart</li>
-            <button className="login" onClick={()=>{
+            {/* <button className="login" onClick={()=>{
               btnNameReact==="Login"?setBtnNameReact("Logout"):setBtnNameReact("Login")
-            }}>{btnNameReact}</button>
+            }}>{btnNameReact}</button> */}
           </ul>
         </div>
       </div> 
