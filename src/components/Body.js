@@ -45,17 +45,17 @@ const Body = () => {
   ) : (
     <>
       <div className="filter">
-        {/* <button
+        <button
           className="filter-btn"
           onClick={() => {
-            const filteredList = resturants.card.card.filter((item) => {
-              // return item.rating > 3;
+            const filteredList = resturants.filter((item) => {
+              return item.info.avgRating > 4.3;
             });
-            setResturants(filteredList);
+            setFilteredRestraunts(filteredList);
           }}
         >
           Top Rated Restraunts1
-        </button> */}
+        </button>
 
         <div className="search">
           <input
