@@ -1,3 +1,7 @@
+import { useState } from "react";
+
+const [btnNameReact, setBtnNameReact]= useState("Login")
+
 const Title = () => {
     return (
       // <h1>Food Villa</h1>
@@ -11,6 +15,7 @@ const Title = () => {
     );
   };
   export const HeaderComponent = () => {
+    console.log("Header render")
     return (
       <div className="header">
         <Title />
@@ -20,9 +25,12 @@ const Title = () => {
             <li>About</li>
             <li>Contact</li>
             <li>Cart</li>
+            <button className="login" onClick={()=>{
+              btnNameReact==="Login"?setBtnNameReact("Logout"):setBtnNameReact("Login")
+            }}>{btnNameReact}</button>
           </ul>
         </div>
-      </div>
+      </div> 
     );
   };
 export default Title;
