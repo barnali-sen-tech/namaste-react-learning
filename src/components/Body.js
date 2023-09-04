@@ -78,7 +78,7 @@ const Body = () => {
               //   setSearchClicked("true");
               // }
               const filteredRestaurant = resturants.filter((res) =>
-                res.data.name.toLowerCase().includes(searchText.toLowerCase())
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
 
               setFilteredRestraunts(filteredRestaurant);
