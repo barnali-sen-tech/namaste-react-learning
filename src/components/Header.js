@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// const [btnNameReact, setBtnNameReact]= useState("Login")
+// const [btnNameReact, setBtnNameReact]= useState("Login") 
 
 const Title = () => {
     return (
