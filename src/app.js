@@ -11,6 +11,9 @@ import Error from "./components/Error";
 const AppLayout = () => {
   return (
     <>
+
+
+    
       <HeaderComponent />
       <Body />
       <Footer />
