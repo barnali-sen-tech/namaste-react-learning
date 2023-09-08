@@ -1,8 +1,10 @@
 import { RestrauntList } from "../utils/Constant";
 import { RestrauntCard } from "./RestrauntCard";
 import Shimmer from "./Shimmer";
+ import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -90,7 +92,7 @@ const Body = () => {
       </div>
       <div className="restraunt-list">
         {filteredRestraunts.map((item) => {
-          return <RestrauntCard data={item?.info} key={item.id} />;
+          return <Link to={"/restraunts/"+item?.info?.id} key={item.info.id} ><RestrauntCard data={item?.info}  /></Link> ;
         })}
       </div>
     </>
