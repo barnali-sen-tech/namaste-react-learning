@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
  import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const Body = () => {
@@ -41,7 +42,8 @@ const Body = () => {
   //   // <h1>Loading...</h1>
   //   <Shimmer/>
   // }
-
+ const status = useOnlineStatus()
+ if (status===false){return <><h1>Please check your internet connection!!</h1></>}
   return resturants.length === 0 ? (
     <Shimmer />
   ) : (
