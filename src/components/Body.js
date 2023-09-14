@@ -1,11 +1,10 @@
 import { RestrauntList } from "../utils/Constant";
 import { RestrauntCard } from "./RestrauntCard";
 import Shimmer from "./Shimmer";
- import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -42,29 +41,37 @@ const Body = () => {
   //   // <h1>Loading...</h1>
   //   <Shimmer/>
   // }
- const status = useOnlineStatus()
- if (status===false){return <><h1>Please check your internet connection!!</h1></>}
+  const status = useOnlineStatus();
+  if (status === false) {
+    return (
+      <>
+        <h1>Please check your internet connection!!</h1>
+      </>
+    );
+  }
   return resturants.length === 0 ? (
     <Shimmer />
   ) : (
     <>
-      <div className="filter">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = resturants.filter((item) => {
-              return item.info.avgRating > 4.3;
-            });
-            setFilteredRestraunts(filteredList);
-          }}
-        >
-          Top Rated Restraunts1
-        </button>
+      <div className="flex">
+        <div className="m-4 p-4 items-center">
+          <button
+            className="px-4 py-2 bg-green-200 rounded-lg"
+            onClick={() => {
+              const filteredList = resturants.filter((item) => {
+                return item.info.avgRating > 4.3;
+              });
+              setFilteredRestraunts(filteredList);
+            }}
+          >
+            Top Rated Restraunts1
+          </button>
+        </div>
 
-        <div className="search">
+        <div className="m-4 p-4 items-center">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             placeholder="search"
             value={searchText}
             onChange={(e) => {
@@ -74,7 +81,7 @@ const Body = () => {
           {/* <h1>{searchText}</h1>
         <h1>{searchClicked}</h1> */}
           <button
-            className="search-btn"
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={(e) => {
               // if (searchClicked === "true") {
               //   setSearchClicked("false");
@@ -90,11 +97,15 @@ const Body = () => {
           >
             search
           </button>
-        </div>   
+        </div>
       </div>
-      <div className="restraunt-list">
+      <div className="flex flex-wrap">
         {filteredRestraunts.map((item) => {
-          return <Link to={"/restraunts/"+item?.info?.id} key={item.info.id} ><RestrauntCard data={item?.info}  /></Link> ;
+          return (
+            <Link to={"/restraunts/" + item?.info?.id} key={item.info.id}>
+              <RestrauntCard data={item?.info} />
+            </Link>
+          );
         })}
       </div>
     </>
