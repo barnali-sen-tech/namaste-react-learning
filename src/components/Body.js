@@ -1,5 +1,5 @@
 import { RestrauntList } from "../utils/Constant";
-import { RestrauntCard } from "./RestrauntCard";
+import { RestrauntCard, withHighRatingLabel } from "./RestrauntCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const Body = () => {
   //   const data = resturants.filter((item) => item.name.includes(searchText));
   //   return data;
   // };
+  const RestaurantCardHighRating = withHighRatingLabel(RestrauntCard);
   console.log("hi");
   console.log("useeffect called");
   const fetchdata = async () => {
@@ -103,7 +104,11 @@ const Body = () => {
         {filteredRestraunts.map((item) => {
           return (
             <Link to={"/restraunts/" + item?.info?.id} key={item.info.id}>
-              <RestrauntCard data={item?.info} />
+              {item?.info?.avgRating > 4.3 ? (
+                <RestaurantCardHighRating data={item?.info} />
+              ) : (
+                <RestrauntCard data={item?.info} />
+              )}
             </Link>
           );
         })}

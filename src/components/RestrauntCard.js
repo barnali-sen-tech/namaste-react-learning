@@ -17,3 +17,12 @@ const {cloudinaryImageId,name,avgRating}=data;
       </div>
     );
   };
+
+  export const withHighRatingLabel = (RestrauntCard)=>{
+    return(props)=>{
+      return(<div>
+        <label>High rating</label>
+        <RestrauntCard {...props}/>
+      </div>)
+    }
+  }
