@@ -2,7 +2,7 @@ import User from "./User";
 import UserClass from "./UserClass"
 
 import React from "react";
-
+import UserContext from "../utils/UserContext";
 
 class About extends React.Component{
 
@@ -19,6 +19,10 @@ class About extends React.Component{
                 <h1>This is About class component</h1>
                 {/* <User name={"barnali"} location={"birati"}/> */}
                 <UserClass name={"barnali from class"} location={"birati from class"}/>
+                <UserContext.Consumer>
+                    {/* here we need to pass a callback func */}
+                    {({loggedInUser})=><h1>From context : {loggedInUser}</h1>}
+                </UserContext.Consumer>
             </div>
         )
     }
