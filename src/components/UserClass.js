@@ -42,7 +42,7 @@ class UserClass extends React.Component {
         <h3>Location: {location}</h3>
         <h4>Contact:xyz</h4>
         {/* <h3>
-          {count}&{count1}
+          {count}&{count1}r
         </h3>
         <button
           onClick={() => {
