@@ -3,8 +3,9 @@ import { RestrauntCard, withHighRatingLabel } from "./RestrauntCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -42,6 +43,7 @@ const Body = () => {
   //   // <h1>Loading...</h1>
   //   <Shimmer/>
   // }
+  const { setUserName, loggedInUser } = useContext(UserContext);
   const status = useOnlineStatus();
   if (status === false) {
     return (
@@ -68,6 +70,18 @@ const Body = () => {
             Top Rated Restraunts1
           </button>
         </div>
+        <div className="m-4 p-4 items-center">
+            <label>Logged In Name :</label>
+          <input
+            type="text"
+            className="border border-solid border-black"
+            placeholder="login name"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+          </div>
 
         <div className="m-4 p-4 items-center">
           <input
@@ -79,6 +93,7 @@ const Body = () => {
               setSearchText(e.target.value);
             }}
           />
+
           {/* <h1>{searchText}</h1>
         <h1>{searchClicked}</h1> */}
           <button
