@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../utils/UserContext";
 
+import {useSelector} from "react-redux"
+
 // const [btnNameReact, setBtnNameReact]= useState("Login") 
 
 const Title = () => {
@@ -21,6 +23,9 @@ const Title = () => {
   export const HeaderComponent = () => {
     console.log("Header render")
     const {loggedInUser} = useContext(UserContext)
+
+    const cartItems = useSelector((store)=>store.cart.items)
+
     return (
       <div className="flex justify-between bg-pink-100">
         <Title />
@@ -30,7 +35,7 @@ const Title = () => {
             <li className="px-4"><Link to="/about">About</Link></li>
             <li className="px-4"><Link to="/contact">Contact</Link></li>
             <li className="px-4"><Link to="/grocery">Grocery</Link></li>
-            <li className="px-4">Cart</li>
+            <li className="px-4 font-bold text-xl"><Link to ="/cart">Cart-({cartItems.length})</Link></li>
             <li className="px-4">{loggedInUser}</li>
             {/* <button className="login" onClick={()=>{
               btnNameReact==="Login"?setBtnNameReact("Logout"):setBtnNameReact("Login")
